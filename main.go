@@ -3,9 +3,9 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"net/http"
-  "fmt"
 )
 
 func main() {
@@ -49,5 +49,5 @@ func main() {
 	})
 
 	http.ListenAndServe(":8080", nil)
-  fmt.Println("listening on port 8080")
+	fmt.Println("listening on port 8080")
 }

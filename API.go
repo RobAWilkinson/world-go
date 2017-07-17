@@ -11,10 +11,10 @@ func GetCity(db *sql.DB, id string) City {
 	query := fmt.Sprint("SELECT * FROM CITY WHERE Id='", id, "'")
 	fmt.Println(query)
 	row := db.QueryRow(query)
-		err := row.Scan(&data.ID, &data.Name, &data.CountryCode, &data.District, &data.Population)
-		if err != nil {
-			panic(err.Error())
-		}
+	err := row.Scan(&data.ID, &data.Name, &data.CountryCode, &data.District, &data.Population)
+	if err != nil {
+		panic(err.Error())
+	}
 	return data
 }
 
@@ -47,10 +47,10 @@ func GetCountry(db *sql.DB, code string) Country {
 	var country Country
 	query := fmt.Sprint("SELECT * FROM COUNTRY WHERE Code='", code, "'")
 	row := db.QueryRow(query)
-		err := row.Scan(&country.Code, &country.Name, &country.Continent, &country.Region, &country.SurfaceArea, &country.IndepYear, &country.Population, &country.LifeExpectancy, &country.GNP, &country.GNPOld, &country.LocalName, &country.GovernmentForm, &country.HeadofState, &country.Capital, &country.Code2)
-		if err != nil {
-			panic(err.Error())
-		}
-		fmt.Println(country)
+	err := row.Scan(&country.Code, &country.Name, &country.Continent, &country.Region, &country.SurfaceArea, &country.IndepYear, &country.Population, &country.LifeExpectancy, &country.GNP, &country.GNPOld, &country.LocalName, &country.GovernmentForm, &country.HeadofState, &country.Capital, &country.Code2)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Println(country)
 	return country
 }

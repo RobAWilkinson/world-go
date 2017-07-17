@@ -54,3 +54,22 @@ func GetCountry(db *sql.DB, code string) Country {
 	fmt.Println(country)
 	return country
 }
+
+func FindCity(db *sql.DB, lookup string) []City {
+	var data []City
+	query := fmt.Sprint("SELECT * FROM city WHERE name like '%", lookup, "%'")
+	fmt.Println(query)
+	rows, err := db.Query(query)
+	if err != nil {
+		panic(err.Error())
+	}
+	for rows.Next() {
+		var city City
+		err := rows.Scan(&city.ID, &city.Name, &city.CountryCode, &city.District, &city.Population)
+		if err != nil {
+			panic(err.Error())
+		}
+		data = append(data, city)
+	}
+	return data
+}

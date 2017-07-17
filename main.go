@@ -15,7 +15,16 @@ func main() {
 	}
 	defer db.Close()
 	http.HandleFunc("/city", func(w http.ResponseWriter, r *http.Request) {
-		if id := r.URL.Query().Get("id"); id != "" {
+		values := r.URL.Query()
+		if query := values.Get("q"); query != "" {
+			city := FindCity(db, query)
+			b, err := json.Marshal(city)
+			if err != nil {
+				panic(err.Error())
+			}
+			w.Write([]byte(b))
+
+		} else if id := values.Get("id"); id != "" {
 			city := GetCity(db, id)
 			b, err := json.Marshal(city)
 			if err != nil {
